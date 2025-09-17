@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Post,Param } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -16,5 +16,9 @@ export class AppController {
   @Post('add')
   getSum(): number {
     return 2 + 2;
+  }
+  @Post('add/:a/:b')
+  getSums(@Param('a') a: string, @Param('b') b: string): number {
+    return Number(a) + Number(b);
   }
 }
