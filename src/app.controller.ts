@@ -1,4 +1,4 @@
-import { Controller, Get, Post,Param } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -21,4 +21,15 @@ export class AppController {
   getSums(@Param('a') a: string, @Param('b') b: string): number {
     return Number(a) + Number(b);
   }
+  @Post('multiply')
+  @ApiBody({
+    schema:{
+      type: 'object',
+      properties:{
+          a: { type: 'array', items: { type: 'array', items: { type: 'number' } } },
+          b: { type: 'array', items: { type: 'array', items: { type: 'number' } } },
+      },
+    },
+  })
+  multiply(@Body() body:{a:number[][];b:number})
 }
